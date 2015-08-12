@@ -12,6 +12,7 @@ export default class Flux extends EventEmitter {
   }
 
   dispatch(action, payload, meta?) {
+    if !action return null
     this.state = this.store(this.state, action, payload);
     this.emit('dispatch', this.state, action, payload, meta);
   }
