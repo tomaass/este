@@ -12,6 +12,9 @@ export default class Flux extends EventEmitter {
   }
 
   dispatch(action, payload, meta?) {
+    if (typeof action !== 'function')
+      throw new TypeError(`Dispatch expected action to be function, got '${typeof action}' instead.`);
+
     this.state = this.store(this.state, action, payload);
     this.emit('dispatch', this.state, action, payload, meta);
   }
